@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cauã Franco — Desenvolvedor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0a;
+    --bg-alt: #131313;
+    --fg: #f5f5f2;
+    --fg-dim: #8f8f89;
+    --line: #2a2a28;
+    --line-soft: #1c1c1a;
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+
+  ::selection{ background:var(--fg); color:var(--bg); }
+
+  :focus-visible{
+    outline:2px solid var(--fg);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(10,10,10,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-soft);
+  }
+
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:72px;
+    gap:16px;
+  }
+
+  .logo{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.02em;
+    white-space:nowrap;
+  }
+  .logo span{ color:var(--fg-dim); }
+
+  .nav-btns{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+
+  .nav-btn{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    color:var(--fg-dim);
+    border:1px solid var(--line);
+    padding:9px 14px;
+    border-radius:3px;
+    transition:border-color .2s ease, color .2s ease, background .2s ease;
+    white-space:nowrap;
+  }
+  .nav-btn:hover{
+    color:var(--fg);
+    border-color:var(--fg-dim);
+    background:var(--bg-alt);
+  }
+  .nav-btn::before{
+    content:'--';
+    color:var(--fg-dim);
+    margin-right:1px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 110px;
+    border-bottom:1px solid var(--line-soft);
+  }
+
+  .hero .eyebrow{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--fg-dim);
+    margin-bottom:18px;
+  }
+
+  .hero h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(40px, 7vw, 76px);
+    line-height:1.02;
+    letter-spacing:-0.02em;
+    margin-bottom:28px;
+  }
+
+  .hero .lede{
+    font-size:18px;
+    color:var(--fg-dim);
+    max-width:540px;
+    margin-bottom:48px;
+  }
+
+  .terminal{
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:var(--bg-alt);
+    max-width:600px;
+    overflow:hidden;
+  }
+
+  .terminal-bar{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:11px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .dot{
+    width:9px; height:9px;
+    border-radius:50%;
+    border:1px solid var(--fg-dim);
+  }
+  .terminal-title{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--fg-dim);
+    margin-left:8px;
+  }
+
+  .terminal-body{
+    font-family:var(--mono);
+    font-size:13.5px;
+    padding:20px 18px 22px;
+    min-height:128px;
+    color:var(--fg);
+    white-space:pre-wrap;
+  }
+  .terminal-body .dim{ color:var(--fg-dim); }
+  .cursor{
+    display:inline-block;
+    width:8px; height:14px;
+    background:var(--fg);
+    margin-left:2px;
+    vertical-align:-2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation:none; }
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* ---------- SECTIONS ---------- */
+  section.block{
+    padding:88px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+
+  .block-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:24px;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--fg-dim);
+  }
+
+  .block h2{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(28px, 4vw, 40px);
+    letter-spacing:-0.01em;
+  }
+
+  .block-intro{
+    color:var(--fg-dim);
+    max-width:620px;
+    margin-bottom:48px;
+    font-size:16px;
+  }
+
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+
+  .card{
+    background:var(--bg);
+    padding:30px 26px;
+  }
+
+  .card .tag{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--fg-dim);
+    margin-bottom:14px;
+    display:block;
+  }
+
+  .card h3{
+    font-family:var(--display);
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+
+  .card p{
+    font-size:14.5px;
+    color:var(--fg-dim);
+  }
+
+  @media (max-width: 760px){
+    .card-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- FOOTER / CONTATO ---------- */
+  footer{
+    padding:96px 0 56px;
+  }
+
+  footer .eyebrow{ margin-bottom:18px; }
+
+  footer h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(30px, 5vw, 48px);
+    letter-spacing:-0.02em;
+    max-width:680px;
+    margin-bottom:18px;
+  }
+
+  footer .lede{
+    color:var(--fg-dim);
+    max-width:520px;
+    margin-bottom:48px;
+    font-size:16px;
+  }
+
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-bottom:56px;
+  }
+
+  .contact-card{
+    background:var(--bg);
+    padding:26px;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    transition:background .2s ease;
+  }
+  .contact-card:hover{ background:var(--bg-alt); }
+
+  .contact-card .cmd{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--fg-dim);
+  }
+  .contact-card .val{
+    font-family:var(--display);
+    font-size:17px;
+    font-weight:600;
+  }
+  .contact-card .arrow{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--fg-dim);
+    margin-top:8px;
+  }
+
+  @media (max-width: 760px){
+    .contact-grid{ grid-template-columns:1fr; }
+  }
+
+  .foot-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding-top:28px;
+    border-top:1px solid var(--line-soft);
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--fg-dim);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">cauã<span>.franco</span></div>
+    <div class="nav-btns">
+      <a class="nav-btn" href="#automacoes">automacoes</a>
+      <a class="nav-btn" href="#landing-pages">landing-pages</a>
+      <a class="nav-btn" href="#apps-web">apps-web</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <div class="eyebrow">// desenvolvedor python &amp; web</div>
+    <h1>Cauã Franco</h1>
+    <p class="lede">Construo automações, landing pages e aplicações web que tiram trabalho repetitivo do seu caminho e colocam seu projeto no ar.</p>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="terminal-title">cauaaugust0 — zsh</span>
+      </div>
+      <div class="terminal-body" id="termBody"></div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="automacoes">
+    <div class="block-head">
+      <h2>Automações em Python</h2>
+      <div class="eyebrow">01 // scripts que trabalham por você</div>
+    </div>
+    <p class="block-intro">Tarefas repetitivas custam tempo e abrem espaço pra erro. Eu transformo processos manuais em rotinas automáticas — de planilhas a integrações entre sistemas — pra você focar no que realmente importa.</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">rotina.py</span>
+        <h3>Rotinas automatizadas</h3>
+        <p>Processos que rodam sozinhos, no horário certo, sem depender de alguém lembrar de fazer.</p>
+      </div>
+      <div class="card">
+        <span class="tag">integra.py</span>
+        <h3>Integração de sistemas</h3>
+        <p>Conecto ferramentas que você já usa pra que conversem entre si automaticamente.</p>
+      </div>
+      <div class="card">
+        <span class="tag">dados.py</span>
+        <h3>Processamento de dados</h3>
+        <p>Coleta, organização e tratamento de dados em escala, sem planilha manual.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="landing-pages">
+    <div class="block-head">
+      <h2>Landing Pages</h2>
+      <div class="eyebrow">02 // primeira impressão que converte</div>
+    </div>
+    <p class="block-intro">Uma landing page boa é rápida, clara e leva o visitante a uma ação. Construo páginas pensadas pra conversão, do primeiro scroll ao botão final.</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">design</span>
+        <h3>Responsivo de ponta a ponta</h3>
+        <p>Perfeita em qualquer tela, do celular ao desktop.</p>
+      </div>
+      <div class="card">
+        <span class="tag">cta</span>
+        <h3>Foco em conversão</h3>
+        <p>Estrutura e copy pensadas pra guiar o visitante até a ação desejada.</p>
+      </div>
+      <div class="card">
+        <span class="tag">perf</span>
+        <h3>Performance otimizada</h3>
+        <p>Carregamento rápido, sem gordura — porque cada segundo de espera custa visitantes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="apps-web" style="border-bottom:none;">
+    <div class="block-head">
+      <h2>Aplicações Web</h2>
+      <div class="eyebrow">03 // sistemas sob medida</div>
+    </div>
+    <p class="block-intro">Quando uma planilha ou um template não dão mais conta, eu construo a aplicação certa pro seu processo — do zero, sob medida pra sua operação.</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">dashboard</span>
+        <h3>Painéis e dashboards</h3>
+        <p>Visualize seus dados e indicadores em um único lugar, em tempo real.</p>
+      </div>
+      <div class="card">
+        <span class="tag">sistema</span>
+        <h3>Sistemas sob medida</h3>
+        <p>Ferramentas construídas em volta do seu processo, não o contrário.</p>
+      </div>
+      <div class="card">
+        <span class="tag">api</span>
+        <h3>Integração com APIs</h3>
+        <p>Aplicações que conversam com outras plataformas e serviços externos.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap" id="contato">
+    <div class="eyebrow">// orçamento</div>
+    <h2>Vamos tirar seu projeto do papel.</h2>
+    <p class="lede">Me conta o que você precisa automatizar ou construir — respondo rápido pelo WhatsApp.</p>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="https://github.com/cauaaugust0" target="_blank" rel="noopener noreferrer">
+        <span class="cmd">$ git remote</span>
+        <span class="val">GitHub</span>
+        <span class="arrow">github.com/cauaaugust0 →</span>
+      </a>
+      <a class="contact-card" href="https://instagram.com/cauaaugust0" target="_blank" rel="noopener noreferrer">
+        <span class="cmd">$ follow</span>
+        <span class="val">Instagram</span>
+        <span class="arrow">@cauaaugust0 →</span>
+      </a>
+      <a class="contact-card" href="https://wa.me/5511965040079" target="_blank" rel="noopener noreferrer">
+        <span class="cmd">$ message --send</span>
+        <span class="val">WhatsApp</span>
+        <span class="arrow">(11) 9 6504-0079 →</span>
+      </a>
+    </div>
+
+    <div class="foot-bottom">
+      <span>cauã franco © 2026</span>
+      <span>disponível para novos projetos</span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  (function(){
+    const el = document.getElementById('termBody');
+    const lines = [
+      { cmd: '$ whoami', out: 'Cauã Franco — desenvolvedor Python & web' },
+      { cmd: '$ skills --list', out: 'automações · landing pages · aplicações web' },
+      { cmd: '$ status', out: 'disponível para novos projetos' }
+    ];
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function renderStatic(){
+      el.innerHTML = lines.map(l =>
+        `<span class="dim">${l.cmd}</span>\n${l.out}\n`
+      ).join('\n') + '<span class="cursor"></span>';
+    }
+
+    if(reduceMotion){
+      renderStatic();
+      return;
+    }
+
+    let html = '';
+    let li = 0, ci = 0, phase = 'cmd';
+
+    function tick(){
+      if(li >= lines.length){
+        el.innerHTML = html + '<span class="cursor"></span>';
+        return;
+      }
+      const line = lines[li];
+      const text = phase === 'cmd' ? line.cmd : line.out;
+
+      if(ci <= text.length){
+        const partial = text.slice(0, ci);
+        const preview = html +
+          (phase === 'cmd' ? `<span class="dim">${partial}</span>` : `<span class="dim">${line.cmd}</span>\n${partial}`) +
+          '<span class="cursor"></span>';
+        el.innerHTML = preview;
+        ci++;
+        setTimeout(tick, phase === 'cmd' ? 38 : 22);
+      } else {
+        if(phase === 'cmd'){
+          html += `<span class="dim">${line.cmd}</span>\n`;
+          phase = 'out';
+          ci = 0;
+          setTimeout(tick, 220);
+        } else {
+          html += `${text}\n\n`;
+          phase = 'cmd';
+          ci = 0;
+          li++;
+          setTimeout(tick, 260);
+        }
+      }
+    }
+    tick();
+  })();
+</script>
+
+</body>
+</html>
